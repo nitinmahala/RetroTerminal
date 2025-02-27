@@ -1,0 +1,477 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "VT323";
+  src: url("/fonts/VT323-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  font-family: "VT323", monospace;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Color Schemes */
+.green-theme {
+  --primary-color: #00ff00;
+  --primary-glow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  --secondary-color: #00aa00;
+  --background-color: #001000;
+}
+
+.amber-theme {
+  --primary-color: #ffb000;
+  --primary-glow: 0 0 10px #ffb000, 0 0 20px #ffb000;
+  --secondary-color: #cc8800;
+  --background-color: #100a00;
+}
+
+.blue-theme {
+  --primary-color: #00ffff;
+  --primary-glow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  --secondary-color: #0088aa;
+  --background-color: #001010;
+}
+
+.red-theme {
+  --primary-color: #ff0000;
+  --primary-glow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+  --secondary-color: #aa0000;
+  --background-color: #100000;
+}
+
+/* CRT Effect */
+.crt {
+  background: var(--background-color);
+  overflow: hidden;
+}
+
+.crt::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.crt::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.27861;
+  }
+  5% {
+    opacity: 0.34769;
+  }
+  10% {
+    opacity: 0.23604;
+  }
+  15% {
+    opacity: 0.90626;
+  }
+  20% {
+    opacity: 0.18128;
+  }
+  25% {
+    opacity: 0.83891;
+  }
+  30% {
+    opacity: 0.65583;
+  }
+  35% {
+    opacity: 0.67807;
+  }
+  40% {
+    opacity: 0.26559;
+  }
+  45% {
+    opacity: 0.84693;
+  }
+  50% {
+    opacity: 0.96019;
+  }
+  55% {
+    opacity: 0.08594;
+  }
+  60% {
+    opacity: 0.20313;
+  }
+  65% {
+    opacity: 0.71988;
+  }
+  70% {
+    opacity: 0.53455;
+  }
+  75% {
+    opacity: 0.37288;
+  }
+  80% {
+    opacity: 0.71428;
+  }
+  85% {
+    opacity: 0.70419;
+  }
+  90% {
+    opacity: 0.7003;
+  }
+  95% {
+    opacity: 0.36108;
+  }
+  100% {
+    opacity: 0.24387;
+  }
+}
+
+.text-glow {
+  color: var(--primary-color);
+  text-shadow: var(--primary-glow);
+}
+
+.terminal-content {
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  text-shadow: var(--primary-glow);
+  height: 100vh;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.terminal-input {
+  background-color: transparent;
+  border: none;
+  color: var(--primary-color);
+  text-shadow: var(--primary-glow);
+  font-family: "VT323", monospace;
+  font-size: 1.2rem;
+  outline: none;
+  width: 100%;
+}
+
+.terminal-input::placeholder {
+  color: var(--secondary-color);
+}
+
+.terminal-output {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.glitch {
+  position: relative;
+  animation: glitch 1s linear infinite;
+}
+
+@keyframes glitch {
+  2%,
+  64% {
+    transform: translate(2px, 0) skew(0deg);
+  }
+  4%,
+  60% {
+    transform: translate(-2px, 0) skew(0deg);
+  }
+  62% {
+    transform: translate(0, 0) skew(5deg);
+  }
+}
+
+.glitch:before,
+.glitch:after {
+  content: attr(title);
+  position: absolute;
+  left: 0;
+}
+
+.glitch:before {
+  animation: glitchTop 1s linear infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+@keyframes glitchTop {
+  2%,
+  64% {
+    transform: translate(2px, -2px);
+  }
+  4%,
+  60% {
+    transform: translate(-2px, 2px);
+  }
+  62% {
+    transform: translate(13px, -1px) skew(-13deg);
+  }
+}
+
+.glitch:after {
+  animation: glitchBottom 1.5s linear infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchBottom {
+  2%,
+  64% {
+    transform: translate(-2px, 0);
+  }
+  4%,
+  60% {
+    transform: translate(-2px, 0);
+  }
+  62% {
+    transform: translate(-22px, 5px) skew(21deg);
+  }
+}
+
+/* Sidebar styles */
+.sidebar {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-right: 1px solid var(--primary-color);
+  width: 200px;
+  padding: 1rem;
+}
+
+.sidebar-item {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.sidebar-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-item.active {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  text-shadow: none;
+}
+
+/* Button styles */
+.terminal-button {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  text-shadow: var(--primary-glow);
+  padding: 0.5rem 1rem;
+  font-family: "VT323", monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.terminal-button:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  text-shadow: none;
+}
+
+/* Form elements */
+.terminal-form-input {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  text-shadow: var(--primary-glow);
+  padding: 0.5rem;
+  font-family: "VT323", monospace;
+  font-size: 1rem;
+  outline: none;
+}
+
+.terminal-form-input:focus {
+  box-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Textarea */
+.terminal-textarea {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  text-shadow: var(--primary-glow);
+  padding: 0.5rem;
+  font-family: "VT323", monospace;
+  font-size: 1rem;
+  resize: none;
+  width: 100%;
+  height: 300px;
+  outline: none;
+}
+
+.terminal-textarea:focus {
+  box-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Task list */
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+}
+
+.task-item.completed {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.task-checkbox {
+  margin-right: 0.5rem;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--primary-color);
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.task-checkbox:checked::before {
+  content: "✓";
+  position: absolute;
+  top: -5px;
+  left: 2px;
+  color: var(--primary-color);
+}
+
+/* Game styles */
+.game-container {
+  border: 1px solid var(--primary-color);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.game-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.game-button {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  text-shadow: var(--primary-glow);
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  font-family: "VT323", monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.game-button:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  text-shadow: none;
+}
+
+/* Clock styles */
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.clock-time {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.clock-date {
+  font-size: 2rem;
+}
+
+/* Settings styles */
+.settings-container {
+  max-width: 600px;
+}
+
+.settings-group {
+  margin-bottom: 2rem;
+}
+
+.settings-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  border-bottom: 1px solid var(--primary-color);
+  padding-bottom: 0.5rem;
+}
+
+.settings-option {
+  margin-bottom: 1rem;
+}
+
+.settings-label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.settings-select {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  text-shadow: var(--primary-glow);
+  padding: 0.5rem;
+  font-family: "VT323", monospace;
+  font-size: 1rem;
+  outline: none;
+}
+
+.settings-checkbox {
+  margin-right: 0.5rem;
+}
+
