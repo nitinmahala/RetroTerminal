@@ -1,5 +1,5 @@
 {
-  "name": "my-v0-project",
+  "name": "Retro Terminal",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-alert-dialog": "^1.1.4",
@@ -41,11 +42,12 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.0.4",
-    "date-fns": "4.1.0",
+    "date-fns": "^3.0.0",
     "embla-carousel-react": "8.5.1",
+    "framer-motion": "^12.4.7",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
-    "next": "^14.2.24",
+    "next": "14.2.24",
     "next-themes": "^0.4.4",
     "react": "^18",
     "react-day-picker": "8.10.1",
